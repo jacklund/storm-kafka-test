@@ -1,4 +1,5 @@
 (ns storm-kafka-test.core
+  (:require [environ.core :refer [env]])
   (:use [backtype.storm clojure config])
   (:import [backtype.storm StormSubmitter LocalCluster]
            [backtype.storm.spout SchemeAsMultiScheme]
@@ -6,12 +7,12 @@
            [storm.kafka KafkaConfig ZkHosts KafkaSpout SpoutConfig StringScheme])
   (:gen-class))
 
-(def zk-hosts "localhost:2181")
-
-(def kafka-zk-hosts (ZkHosts. zk-hosts)) 
+(def kafka-zk-hosts
+  (ZkHosts. (env :zookeeper-hosts)))
 
 (def kafka-config
-  (let [cfg (SpoutConfig. kafka-zk-hosts "test" "/kafka" "storm-kafka-test")]
+  (let [cfg (SpoutConfig.
+              kafka-zk-hosts (env :kafka-topic) (env :zookeeper-root) (env :zookeeper-id))]
     (set! (. cfg scheme) (SchemeAsMultiScheme. (StringScheme.)))
     (set! (. cfg startOffsetTime) (kafka.api.OffsetRequest/LatestTime))
     cfg))
@@ -32,7 +33,8 @@
   (topology spout-map bolt-map))
 
 (def topology-options
-  {TOPOLOGY-DEBUG true TOPOLOGY-WORKERS 20})
+  {TOPOLOGY-DEBUG   (env :topology-debug)
+   TOPOLOGY-WORKERS (env :topology-workers)})
 
 (defn run-local! [name]
   (let [cluster (LocalCluster.)]
