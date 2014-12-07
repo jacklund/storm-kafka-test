@@ -1,36 +1,34 @@
-# storm-kafka-es
+storm-kafka-test
+================
 
-FIXME: description
+Spike of Clojure project to send information from [Apache
+Kafka](<http://kafka.apache.org/)>
 
-## Installation
+<to [Apache Storm](https://storm.apache.org/).>
 
-Download from http://example.com/FIXME.
+Notes
+-----
 
-## Usage
+This project is currently using Clojure 1.5.1 rather than 1.6 because [Storm is
+stuck at 1.5](<https://issues.apache.org/jira/browse/STORM-265)>
 
-FIXME: explanation
+Usage
+-----
 
-    $ java -jar storm-kafka-es-0.1.0-standalone.jar [args]
+To run the example in local mode:
 
-## Options
+`$ lein run --local `*name*
 
-FIXME: listing of options this app accepts.
+To run it distributed:
 
-## Examples
+`% lein run `*name*
 
-...
+where *name* is the name you want to register it as with Storm
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
+License
+-------
 
 Copyright © 2014 FIXME
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License either version 1.0 or (at your
+option) any later version.
