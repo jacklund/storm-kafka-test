@@ -47,6 +47,6 @@
   (StormSubmitter/submitTopology name topology-options (mk-topology)))
 
 (defn -main [& args]
-  (if (= (first args) "--local")
-    (run-local! (second args))
+  (if (= (env :cluster-mode) :local)
+    (run-local! (first args))
     (run-distributed! (first args))))

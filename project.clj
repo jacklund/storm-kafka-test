@@ -13,7 +13,8 @@
   :plugins [[lein-environ "1.0.0"]]
   :profiles {:dev
              {:env
-              {:kafka-topic      "test"
+              {:cluster-mode     :local
+               :kafka-topic      "test"
                :topology-debug   true
                :topology-workers 20
                :zookeeper-hosts  "localhost:2181"

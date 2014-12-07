@@ -13,11 +13,7 @@ stuck at 1.5](https://issues.apache.org/jira/browse/STORM-265)
 Usage
 -----
 
-To run the example in local mode:
-
-`$ lein run --local `*name*
-
-To run it distributed:
+To run the example:
 
 `% lein run `*name*
 
