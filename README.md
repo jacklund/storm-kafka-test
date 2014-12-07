@@ -2,15 +2,13 @@ storm-kafka-test
 ================
 
 Spike of Clojure project to send information from [Apache
-Kafka](<http://kafka.apache.org/)>
-
-<to [Apache Storm](https://storm.apache.org/).>
+Kafka](http://kafka.apache.org/) to [Apache Storm](https://storm.apache.org/).
 
 Notes
 -----
 
 This project is currently using Clojure 1.5.1 rather than 1.6 because [Storm is
-stuck at 1.5](<https://issues.apache.org/jira/browse/STORM-265)>
+stuck at 1.5](https://issues.apache.org/jira/browse/STORM-265)
 
 Usage
 -----
