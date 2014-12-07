@@ -26,7 +26,7 @@ where *name* is the name you want to register it as with Storm
 License
 -------
 
-Copyright © 2014 FIXME
+Copyright © 2014 Jack Lund
 
 Distributed under the Eclipse Public License either version 1.0 or (at your
 option) any later version.
