@@ -1,5 +1,6 @@
 (ns storm-kafka-test.core
-  (:require [environ.core :refer [env]])
+  (:require [environ.core :refer [env]]
+            [storm-kafka-test.schemes :as schemes])
   (:use [backtype.storm clojure config])
   (:import [backtype.storm StormSubmitter LocalCluster]
            [backtype.storm.spout SchemeAsMultiScheme]
@@ -13,7 +14,8 @@
 (def kafka-config
   (let [cfg (SpoutConfig.
               kafka-zk-hosts (env :kafka-topic) (env :zookeeper-root) (env :zookeeper-id))]
-    (set! (. cfg scheme) (SchemeAsMultiScheme. (StringScheme.)))
+    ; (set! (. cfg scheme) (SchemeAsMultiScheme. (StringScheme.)))
+    (set! (. cfg scheme) (SchemeAsMultiScheme. (storm-kafka-test.schemes.JsonScheme.)))
     (set! (. cfg startOffsetTime) (kafka.api.OffsetRequest/LatestTime))
     cfg))
 
@@ -22,7 +24,7 @@
     {"kafka-spout" (spout-spec kafka-spout)}))
 
 (defbolt print-bolt [] [tuple collector]
-  (prn tuple)
+  (prn (tuple "json"))
   (ack! collector tuple))
 
 (def bolt-map
